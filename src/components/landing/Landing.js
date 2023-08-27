@@ -1,17 +1,12 @@
 import Banner from "./Banner";
-import Product from "../products/Product";
 import ProductList from "../products/ProductList";
 import ScrollToTopOnMount from "../template/ScrollToTopOnMount";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import {
-  faArrowRight,
-  faTruck,
-  faCreditCard,
-  faMoneyCheckAlt,
+ 
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+
 import { useState, useEffect } from "react";
 
 function Landing() {

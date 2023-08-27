@@ -1,6 +1,5 @@
 import BannerZero from "./banner-0.jpg";
 
-
 function BannerIncidator(props) {
   return (
     <button
@@ -48,12 +47,10 @@ function Banner() {
       <div className="carousel-indicators">
         <BannerIncidator index="0" active={true} />
         <BannerIncidator index="1" />
-        
       </div>
       <div className="carousel-inner">
         <BannerImage image={BannerZero} active={true} />
-        <BannerImage image={BannerZero}  />
-        
+        <BannerImage image={BannerZero} />
       </div>
     </div>
   );

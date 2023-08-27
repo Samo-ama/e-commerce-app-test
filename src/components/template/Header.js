@@ -2,13 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-
-
-
 function Header() {
-
-  const [openedDrawer, setOpenedDrawer] = useState(false)
-  
+  const [openedDrawer, setOpenedDrawer] = useState(false);
 
   function toggleDrawer() {
     setOpenedDrawer(!openedDrawer);
@@ -16,7 +11,7 @@ function Header() {
 
   function changeNav(event) {
     if (openedDrawer) {
-      setOpenedDrawer(false)
+      setOpenedDrawer(false);
     }
   }
 
@@ -33,17 +28,20 @@ function Header() {
             <span className="ms-2 h5">Commerce</span>
           </Link>
 
-          <div className={"navbar-collapse offcanvas-collapse " + (openedDrawer ? 'open' : '')}>
+          <div
+            className={
+              "navbar-collapse offcanvas-collapse " +
+              (openedDrawer ? "open" : "")
+            }
+          >
             <ul className="navbar-nav me-auto mb-lg-0">
               <li className="nav-item">
                 <Link to="/" className="nav-link" replace onClick={changeNav}>
-                products
+                  products
                 </Link>
               </li>
-              
-              
             </ul>
-           
+
             <ul className="navbar-nav mb-2 mb-lg-0">
               <li className="nav-item dropdown">
                 <a
@@ -62,12 +60,12 @@ function Header() {
                   aria-labelledby="userDropdown"
                 >
                   <li>
-                    <Link to="/" className="dropdown-item" >
+                    <Link to="/" className="dropdown-item">
                       Login
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" className="dropdown-item" >
+                    <Link to="/" className="dropdown-item">
                       Sign Up
                     </Link>
                   </li>
@@ -75,8 +73,6 @@ function Header() {
               </li>
             </ul>
           </div>
-
-         
         </div>
       </nav>
     </header>

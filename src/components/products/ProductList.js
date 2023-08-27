@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Product from "./Product";
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
@@ -52,20 +51,14 @@ function ProductList({ searchQuery, selectedCategory }) {
   };
 
   // Filter products based on search query
-  /* const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(searchQuery.toLowerCase())&&
-    (selectedCategory === "" || product.category === selectedCategory)
-  ); */
-
   const filteredProducts = products
-  ? products.filter((product) => {
-    console.log("Product:", product); // Log the product information
-    return (
-      product.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
-      (selectedCategory === "" || product.category === selectedCategory)
-    );
-  })
-: [];
+    ? products.filter((product) => {
+        return (
+          product.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
+          (selectedCategory === "" || product.category === selectedCategory)
+        );
+      })
+    : [];
 
   return (
     <spam>
