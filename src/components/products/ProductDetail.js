@@ -118,7 +118,11 @@ function ProductDetail() {
 
               <dt className="col-sm-4">Rating</dt>
               <dd className="col-sm-8 mb-3">
-                <span>{product.rating.rate} </span>
+
+              
+              
+                <span >{product.rating.rate} </span>
+                <div className="d-flex  mb-3 ">
                 <Ratings
                   rating={product.rating.rate}
                   widgetRatedColors="rgb(253, 204, 13)"
@@ -136,6 +140,7 @@ function ProductDetail() {
                     );
                   })}
                 </Ratings>
+                </div>
               </dd>
             </dl>
 

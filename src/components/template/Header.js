@@ -5,9 +5,7 @@ import { useState } from "react";
 function Header() {
   const [openedDrawer, setOpenedDrawer] = useState(false);
 
-  function toggleDrawer() {
-    setOpenedDrawer(!openedDrawer);
-  }
+ 
 
   function changeNav(event) {
     if (openedDrawer) {

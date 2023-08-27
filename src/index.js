@@ -1,7 +1,7 @@
 import "./bootstrap-custom.css";
 import "./index.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-
+import { BrowserRouter } from "react-router-dom";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
@@ -14,10 +14,12 @@ import { HashRouter as Router } from "react-router-dom";
 library.add(fas, far, fab);
 
 ReactDOM.render(
+  <BrowserRouter>
   <React.StrictMode>
     <Router>
       <App />
     </Router>
-  </React.StrictMode>,
+  </React.StrictMode>
+  </BrowserRouter>,
   document.getElementById("root")
 );

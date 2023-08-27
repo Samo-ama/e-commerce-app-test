@@ -13,7 +13,7 @@ function Landing() {
   const [searchQuery, setSearchQuery] = useState(""); // State to store search query
   const [selectedCategory, setSelectedCategory] = useState(""); // State to store selectedCategory
   const [categories, setCategories] = useState([]); // State to store categories
-
+ 
   // Fetch categories from the API
   useEffect(() => {
     fetch("https://fakestoreapi.com/products/categories")
