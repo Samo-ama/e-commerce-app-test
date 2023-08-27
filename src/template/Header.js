@@ -2,9 +2,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
+
+
+
 function Header() {
 
   const [openedDrawer, setOpenedDrawer] = useState(false)
+  
 
   function toggleDrawer() {
     setOpenedDrawer(!openedDrawer);
@@ -36,6 +40,7 @@ function Header() {
                 products
                 </Link>
               </li>
+              
               
             </ul>
            

@@ -1,18 +1,11 @@
+import React from "react";
 import Template from "./template/Template";
-
-import { Switch, Route } from "react-router-dom";
-import Landing from "./landing/Landing";
-
-
+import Routes from "./Routes";
 
 function App() {
   return (
     <Template>
-      <Switch>
-        <Route path="/" exact>
-          <Landing />
-        </Route>
-      </Switch>
+      <Routes />
     </Template>
   );
 }

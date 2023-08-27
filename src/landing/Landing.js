@@ -4,7 +4,13 @@ import ProductList from "../products/ProductList";
 import ScrollToTopOnMount from "../template/ScrollToTopOnMount";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { faArrowRight, faTruck, faCreditCard, faMoneyCheckAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRight,
+  faTruck,
+  faCreditCard,
+  faMoneyCheckAlt,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -13,17 +19,17 @@ function Landing() {
   const [selectedCategory, setSelectedCategory] = useState(""); // State to store selectedCategory
   const [categories, setCategories] = useState([]); // State to store categories
 
- // Fetch categories from the API
- useEffect(() => {
-  fetch("https://fakestoreapi.com/products/categories")
-    .then((response) => response.json())
-    .then((data) => {
-      setCategories(data);
-    })
-    .catch((error) => {
-      console.error("Error fetching categories:", error);
-    });
-}, []);
+  // Fetch categories from the API
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products/categories")
+      .then((response) => response.json())
+      .then((data) => {
+        setCategories(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching categories:", error);
+      });
+  }, []);
 
   // Handler for updating search query
   const handleSearch = (event) => {
@@ -34,45 +40,37 @@ function Landing() {
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
   };
- 
 
   return (
     <>
       <ScrollToTopOnMount />
       <Banner />
 
-      
-    
-      <div className="container pb-5 px-lg-5 mr-5 mt-4" >
+      <div className="container pb-5 px-lg-5 mr-5 mt-4">
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 px-md-5 mt-1">
-       
-
-        <div className="col-lg-4 d-none d-lg-block">
+          <div className="col-lg-4 d-none d-lg-block">
             <div className="input-group">
-            <button className="btn btn-outline-dark">
-                  <FontAwesomeIcon icon={faSearch} />
-                </button>
-              <input 
-              className="form-control" 
-              type="text" 
-              placeholder="Search products..." 
-              aria-label="search input"
-              value={searchQuery}
-              onChange={handleSearch} // Call handleSearch on input change
-               />
-              <div className="input-group-append">
-               
-              </div>
+              <button className="btn btn-outline-dark">
+                <FontAwesomeIcon icon={faSearch} />
+              </button>
+              <input
+                className="form-control"
+                type="text"
+                placeholder="Search products..."
+                aria-label="search input"
+                value={searchQuery}
+                onChange={handleSearch} // Call handleSearch on input change
+              />
+              <div className="input-group-append"></div>
             </div>
           </div>
 
           <div className="col-lg-3 d-none d-lg-block ">
-          
-            <select 
-            className="form-select " 
-            aria-label="Default select example" 
-            defaultValue=""
-            onChange={handleCategoryChange}
+            <select
+              className="form-select "
+              aria-label="Default select example"
+              defaultValue=""
+              onChange={handleCategoryChange}
             >
               <option value="">All category</option>
               {categories.map((category) => (
@@ -81,17 +79,14 @@ function Landing() {
                 </option>
               ))}
             </select>
-            
           </div>
-         
-        
         </div>
 
-        <ProductList searchQuery={searchQuery} selectedCategory={selectedCategory} />
-
+        <ProductList
+          searchQuery={searchQuery}
+          selectedCategory={selectedCategory}
+        />
       </div>
-
-     
     </>
   );
 }
