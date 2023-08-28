@@ -6,15 +6,17 @@ import ScrollToTopOnMount from "../template/ScrollToTopOnMount";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
-
-const iconPath =
-  "M18.571 7.221c0 0.201-0.145 0.391-0.29 0.536l-4.051 3.951 0.96 5.58c0.011 0.078 0.011 0.145 0.011 0.223 0 0.29-0.134 0.558-0.458 0.558-0.156 0-0.313-0.056-0.446-0.134l-5.011-2.634-5.011 2.634c-0.145 0.078-0.29 0.134-0.446 0.134-0.324 0-0.469-0.268-0.469-0.558 0-0.078 0.011-0.145 0.022-0.223l0.96-5.58-4.063-3.951c-0.134-0.145-0.279-0.335-0.279-0.536 0-0.335 0.346-0.469 0.625-0.513l5.603-0.815 2.511-5.078c0.1-0.212 0.29-0.458 0.547-0.458s0.446 0.246 0.547 0.458l2.511 5.078 5.603 0.815c0.268 0.045 0.625 0.179 0.625 0.513z";
+import { useCart } from "../CartContext";
 
 function ProductDetail() {
+  const iconPath =
+    "M18.571 7.221c0 0.201-0.145 0.391-0.29 0.536l-4.051 3.951 0.96 5.58c0.011 0.078 0.011 0.145 0.011 0.223 0 0.29-0.134 0.558-0.458 0.558-0.156 0-0.313-0.056-0.446-0.134l-5.011-2.634-5.011 2.634c-0.145 0.078-0.29 0.134-0.446 0.134-0.324 0-0.469-0.268-0.469-0.558 0-0.078 0.011-0.145 0.022-0.223l0.96-5.58-4.063-3.951c-0.134-0.145-0.279-0.335-0.279-0.536 0-0.335 0.346-0.469 0.625-0.513l5.603-0.815 2.511-5.078c0.1-0.212 0.29-0.458 0.547-0.458s0.446 0.246 0.547 0.458l2.511 5.078 5.603 0.815c0.268 0.045 0.625 0.179 0.625 0.513z";
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { dispatch } = useCart(); // Get the dispatch function from the cart context
+  const [isButtondisabled, setIsButtondisabled] = useState(true);
 
   useEffect(() => {
     // Fetch product from the API
@@ -55,8 +57,20 @@ function ProductDetail() {
       </div>
     );
   }
-
-  function changeRating(newRating) {}
+  const handleAddToCart = () => {
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        image: product.image,
+        category: product.category,
+        quantity:1,
+      },
+    });
+    setIsButtondisabled(false);
+  };
 
   return (
     <div className="container mt-5 py-4 px-xl-5">
@@ -98,7 +112,11 @@ function ProductDetail() {
 
             <div className="row g-3 mb-4">
               <div className="col">
-                <button className="btn btn-outline-dark py-2 w-100">
+                <button
+                  className="btn btn-outline-dark py-2 w-100"
+                  disabled={!isButtondisabled}
+                  onClick={handleAddToCart}
+                >
                   Add to cart
                 </button>
               </div>
@@ -118,28 +136,25 @@ function ProductDetail() {
 
               <dt className="col-sm-4">Rating</dt>
               <dd className="col-sm-8 mb-3">
-
-              
-              
-                <span >{product.rating.rate} </span>
+                <span>{product.rating.rate} </span>
                 <div className="d-flex  mb-3 ">
-                <Ratings
-                  rating={product.rating.rate}
-                  widgetRatedColors="rgb(253, 204, 13)"
-                  widgetSpacings="4px"
-                >
-                  {Array.from({ length: 5 }, (_, i) => {
-                    return (
-                      <Ratings.Widget
-                        key={i}
-                        widgetDimension="20px"
-                        svgIconViewBox="0 0 19 20"
-                        svgIconPath={iconPath}
-                        widgetHoverColor="rgb(253, 204, 13)"
-                      />
-                    );
-                  })}
-                </Ratings>
+                  <Ratings
+                    rating={product.rating.rate}
+                    widgetRatedColors="rgb(253, 204, 13)"
+                    widgetSpacings="4px"
+                  >
+                    {Array.from({ length: 5 }, (_, i) => {
+                      return (
+                        <Ratings.Widget
+                          key={i}
+                          widgetDimension="20px"
+                          svgIconViewBox="0 0 19 20"
+                          svgIconPath={iconPath}
+                          widgetHoverColor="rgb(253, 204, 13)"
+                        />
+                      );
+                    })}
+                  </Ratings>
                 </div>
               </dd>
             </dl>

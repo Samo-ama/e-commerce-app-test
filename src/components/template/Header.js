@@ -1,10 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useCart } from "../CartContext";
 
 function Header() {
   const [openedDrawer, setOpenedDrawer] = useState(false);
-
+  const { cart } = useCart();
+  const totalItemsInCart = cart.length;
+console.log("cart",cart);
+console.log("total",totalItemsInCart);
  
 
   function changeNav(event) {
@@ -39,6 +43,12 @@ function Header() {
                 </Link>
               </li>
             </ul>
+            <Link to="/my-cart">
+             <button type="button" className="btn btn-outline-dark me-3 d-none d-lg-inline">
+              <FontAwesomeIcon icon={["fas", "shopping-cart"]} />
+              <span className="ms-3 badge rounded-pill bg-dark">{totalItemsInCart}</span>
+            </button>
+            </Link>
 
             <ul className="navbar-nav mb-2 mb-lg-0">
               <li className="nav-item dropdown">
