@@ -98,6 +98,7 @@ function ProductDetail() {
             <div className="col-12 mb-4">
               <img
                 className="border rounded ratio ratio-1x1"
+                
                 alt=""
                 src={product.image}
               />

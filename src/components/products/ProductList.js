@@ -3,6 +3,8 @@ import Product from "./Product";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import "../../index.css";
+
 
 function ProductList({ searchQuery, selectedCategory }) {
   const [products, setProducts] = useState([]);
@@ -62,11 +64,11 @@ function ProductList({ searchQuery, selectedCategory }) {
 
   return (
     <spam>
-      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 px-md-5 mt-1">
+      <div className="product-grid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 px-md-5 mt-1">
         {!loading &&
           !error &&
           filteredProducts.slice(0, visibleProducts).map((product) => (
-            <div key={product.id} className="col-lg-4">
+            <div key={product.id} className="col product-col">
               <Product product={product} />
             </div>
           ))}

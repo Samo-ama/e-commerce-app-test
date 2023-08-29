@@ -14,6 +14,8 @@ import { faTimes, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { useCart } from "../CartContext";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import "../../index.css";
+
 
 export default function CartCheckout() {
 
@@ -105,7 +107,7 @@ export default function CartCheckout() {
     <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
       <Container className="h-100 py-5 mt-5">
         <Row className="justify-content-center align-items-center h-100">
-          <Col>
+          <Col >
             {/*display the success alert */}
             {showSuccessAlert && (
               <Alert
@@ -131,8 +133,8 @@ export default function CartCheckout() {
                           <img
                             src={item.image}
                             fluid
-                            style={{ width: "150px" }}
-                            alt="Generic placeholder"
+                            style={{ width: "90px" }}
+                            alt=""
                           />
                         </div>
 
@@ -142,16 +144,14 @@ export default function CartCheckout() {
                             variant="danger"
                             onClick={() => handleRemoveFromCart(item.id)}
                           >
-                            <FontAwesomeIcon icon={faTimes} />
+                            <FontAwesomeIcon icon={faTimes} size="2xs" />
                           </Button>
 
                           <h5 className="text-primary">{item.title}</h5>
                           <h6 style={{ color: "#9e9e9e" }}>
                             Category: {item.category}
                           </h6>
-                          <h6 style={{ color: "#9e9e9e" }}>
-                            quantity: {item.quantity}
-                          </h6>
+                          
 
                           <div className="d-flex align-items-center">
                             <p className="fw-bold mb-0 me-5 pe-3">
