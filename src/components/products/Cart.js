@@ -36,7 +36,7 @@ export default function CartCheckout() {
     for (const item of cart) {
       total += item.price * item.quantity;
     }
-    setTotalPrice(total);
+    setTotalPrice(parseFloat(total.toFixed(3)));
   }, [cart]);
 
   const handleQuantityChange = (itemId, newQuantity) => {

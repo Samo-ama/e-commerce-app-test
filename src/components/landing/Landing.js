@@ -2,21 +2,19 @@ import Banner from "./Banner";
 import ProductList from "../products/ProductList";
 import ScrollToTopOnMount from "../template/ScrollToTopOnMount";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
- 
-  faSearch,
-} from "@fortawesome/free-solid-svg-icons";
-
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
+import { productsByCategories_API } from "../../fakestoreAPI";
 
 function Landing() {
+  // State management
   const [searchQuery, setSearchQuery] = useState(""); // State to store search query
   const [selectedCategory, setSelectedCategory] = useState(""); // State to store selectedCategory
   const [categories, setCategories] = useState([]); // State to store categories
- 
-  // Fetch categories from the API
+
+  // Fetch categories from the API when the component mounts
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products/categories")
+    fetch(productsByCategories_API)
       .then((response) => response.json())
       .then((data) => {
         setCategories(data);

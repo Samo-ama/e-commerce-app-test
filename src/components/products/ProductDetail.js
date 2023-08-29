@@ -7,29 +7,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { useCart } from "../CartContext";
+import { products_API } from "../../fakestoreAPI";
 
 function ProductDetail() {
-  const iconPath =
+  const iconPath = // SVG path data
     "M18.571 7.221c0 0.201-0.145 0.391-0.29 0.536l-4.051 3.951 0.96 5.58c0.011 0.078 0.011 0.145 0.011 0.223 0 0.29-0.134 0.558-0.458 0.558-0.156 0-0.313-0.056-0.446-0.134l-5.011-2.634-5.011 2.634c-0.145 0.078-0.29 0.134-0.446 0.134-0.324 0-0.469-0.268-0.469-0.558 0-0.078 0.011-0.145 0.022-0.223l0.96-5.58-4.063-3.951c-0.134-0.145-0.279-0.335-0.279-0.536 0-0.335 0.346-0.469 0.625-0.513l5.603-0.815 2.511-5.078c0.1-0.212 0.29-0.458 0.547-0.458s0.446 0.246 0.547 0.458l2.511 5.078 5.603 0.815c0.268 0.045 0.625 0.179 0.625 0.513z";
+  // State variables
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { dispatch } = useCart(); // Get the dispatch function from the cart context
+  const { dispatch } = useCart(); // Cart context dispatch function
   const [isButtondisabled, setIsButtondisabled] = useState(true);
 
+  // Fetch product data
   useEffect(() => {
-    // Fetch product from the API
-    fetch(`https://fakestoreapi.com/products/${productId}`)
+    fetch(`${products_API}/${productId}`)
       .then((response) => response.json())
       .then((data) => {
         setProduct(data);
-        setLoading(false); // Data is loaded, set loading to false
+        setLoading(false);
       })
       .catch((error) => {
         setError(error);
-        console.error("Error fetching products:", error);
-        setLoading(false); // Error occurred, set loading to false
+        setLoading(false);
       });
   }, [productId]);
 
@@ -42,7 +43,7 @@ function ProductDetail() {
       </div>
     );
   }
-
+  // Error state
   if (error) {
     return (
       <div className="bg-light text-black d-flex flex-column align-items-center justify-content-center py-5 mt-5">
@@ -57,6 +58,7 @@ function ProductDetail() {
       </div>
     );
   }
+  // Handle adding product to cart
   const handleAddToCart = () => {
     dispatch({
       type: "ADD_TO_CART",
@@ -66,7 +68,7 @@ function ProductDetail() {
         price: product.price,
         image: product.image,
         category: product.category,
-        quantity:1,
+        quantity: 1,
       },
     });
     setIsButtondisabled(false);
@@ -83,22 +85,22 @@ function ProductDetail() {
             </Link>
           </li>
           <li className="breadcrumb-item">
-            <a className="text-decoration-none link-secondary" href="!#">
+            <Link className="text-decoration-none link-secondary" to="/">
               {product.category}
-            </a>
+            </Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
             {product.title}
           </li>
         </ol>
       </nav>
+      {/* product details */}
       <div className="row mb-4">
         <div className="col-lg-6">
           <div className="row">
             <div className="col-12 mb-4">
               <img
                 className="border rounded ratio ratio-1x1"
-                
                 alt=""
                 src={product.image}
               />
@@ -122,7 +124,9 @@ function ProductDetail() {
                 </button>
               </div>
               <div className="col">
-                <button className="btn btn-dark py-2 w-100">Buy now</button>
+                <button disabled className="btn btn-dark py-2 w-100">
+                  Buy now
+                </button>
               </div>
             </div>
 

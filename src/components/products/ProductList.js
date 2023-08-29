@@ -1,32 +1,39 @@
 import React, { useState, useEffect } from "react";
 import Product from "./Product";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSpinner,
+  faExclamationCircle,
+} from "@fortawesome/free-solid-svg-icons";
+import { products_API } from "../../fakestoreAPI";
 import "../../index.css";
 
-
+// Component to List Products
 function ProductList({ searchQuery, selectedCategory }) {
+  // State variables
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [visibleProducts, setVisibleProducts] = useState(9);
 
+  // Asynchronous function to fetch data
+  const fetchData = async () => {
+    try {
+      const response = await fetch(products_API);
+      const data = await response.json();
+      setProducts(data);
+      setLoading(false);
+    } catch (err) {
+      setError(err);
+      setLoading(false);
+    }
+  };
+  // Fetch products when component mounts
   useEffect(() => {
-    // Fetch data from the API
-    fetch("https://fakestoreapi.com/products")
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data);
-        setLoading(false); // Data is loaded, set loading to false
-      })
-      .catch((error) => {
-        setError(error);
-        console.error("Error fetching products:", error);
-        setLoading(false); // Error occurred, set loading to false
-      });
+    fetchData();
   }, []);
 
+  // Display loading spinner
   if (loading) {
     return (
       <div className="text-center py-5 mt-5">
@@ -35,6 +42,7 @@ function ProductList({ searchQuery, selectedCategory }) {
       </div>
     );
   }
+
   // Display error message
   if (error) {
     return (
@@ -47,44 +55,42 @@ function ProductList({ searchQuery, selectedCategory }) {
     );
   }
 
+  // Load more products when 'Load More' button is clicked
   const loadMore = () => {
-    const remainingProducts = filteredProducts.slice(visibleProducts);
-    setVisibleProducts(visibleProducts + Math.min(9, remainingProducts.length));
+    const nextVisible = visibleProducts + 9;
+    setVisibleProducts(nextVisible);
   };
 
-  // Filter products based on search query
-  const filteredProducts = products
-    ? products.filter((product) => {
-        return (
-          product.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
-          (selectedCategory === "" || product.category === selectedCategory)
-        );
-      })
-    : [];
+  // Filter products based on search query and selected category
+  const filteredProducts = products.filter((product) => {
+    return (
+      product.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
+      (selectedCategory === "" || product.category === selectedCategory)
+    );
+  });
 
   return (
-    <spam>
+    <span>
+      {/* Display filtered products */}
       <div className="product-grid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 px-md-5 mt-1">
-        {!loading &&
-          !error &&
-          filteredProducts.slice(0, visibleProducts).map((product) => (
-            <div key={product.id} className="col product-col">
-              <Product product={product} />
-            </div>
-          ))}
+        {filteredProducts.slice(0, visibleProducts).map((product) => (
+          <div key={product.id} className="col product-col">
+            <Product product={product} />
+          </div>
+        ))}
       </div>
-      <br />
 
-      {!loading && visibleProducts < filteredProducts.length && (
+      {/* Display 'Load More' button */}
+      {visibleProducts < filteredProducts.length && (
         <div className="d-flex flex-column bg-white py-4">
           <div className="d-flex justify-content-center">
-            <button className="btn btn-primary" onClick={loadMore} replace>
+            <button className="btn btn-primary" onClick={loadMore}>
               LOAD MORE <FontAwesomeIcon icon={faSpinner} className="ms-2" />
             </button>
           </div>
         </div>
       )}
-    </spam>
+    </span>
   );
 }
 
