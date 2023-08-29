@@ -16,9 +16,9 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function CartCheckout() {
+
   const { cart, dispatch } = useCart();
   const [totalPrice, setTotalPrice] = useState(0); //Total price state
-
   const [cardNumber, setCardNumber] = useState("");
   const [cardNumberError, setCardNumberError] = useState("");
   const [cvv, setCVV] = useState("");
@@ -93,34 +93,32 @@ export default function CartCheckout() {
       };
       setShowSuccessAlert(true);
       console.log("form Data:", formData);
-       // Clear the form here
-    setCardNumber("");
-    setCVV("");
-    setExpiration("");
-    setNameOnCard("");
+      // Clear the form here
+      setCardNumber("");
+      setCVV("");
+      setExpiration("");
+      setNameOnCard("");
     }
-   
   };
 
   return (
     <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
       <Container className="h-100 py-5 mt-5">
-        
         <Row className="justify-content-center align-items-center h-100">
-          
           <Col>
-             {/*display the success alert */}
-         {showSuccessAlert && (
-          <Alert variant="success" onClose={() => setShowSuccessAlert(false)} dismissible>
-            <Alert.Heading>Success!</Alert.Heading>
-            <p>
-              Your payment was successful.
-            </p>
-          </Alert>
-        )}
+            {/*display the success alert */}
+            {showSuccessAlert && (
+              <Alert
+                variant="success"
+                onClose={() => setShowSuccessAlert(false)}
+                dismissible
+              >
+                <Alert.Heading>Success!</Alert.Heading>
+                <p>Your payment was successful.</p>
+              </Alert>
+            )}
             <Card className="shopping-cart" style={{ borderRadius: "15px" }}>
               <Card.Body className="text-black">
-               
                 <Row>
                   <Col lg="7" className="px-5 py-4">
                     <h3 className="mb-5 pt-2 text-center fw-bold text-uppercase">
@@ -291,7 +289,6 @@ export default function CartCheckout() {
                           value={expiration}
                           onChange={(e) => setExpiration(e.target.value)}
                           isInvalid={expirationError}
-                          
                           required
                           style={{ width: "90px" }}
                         />
