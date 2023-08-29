@@ -1,6 +1,18 @@
-# Project Name
+# Project Overview
 
-Test E-commerce Application
+Test E-commerce Application by Ebtisam using React, Bootstrap and AWS Amplify
+
+The web app is hosted on this domain: https://master.dyhvdyznbdkgo.amplifyapp.com/#/, synced with master branch
+
+You can also run this web app locally by following the steps below
+
+## TODO
+
+I've added additional features to the website such as a shopping cart feature, i developed the feature on dev/cart branch, but currently merged to master
+
+I have plans to add a log in/log out feature using AWS Cognito
+
+Refactor folder structure
 
 ## Getting Started
 
@@ -31,20 +43,10 @@ In the project directory, you can run:
 Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `npm run build`
 
 Builds the app for production to the `build` folder.
 It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 
 
